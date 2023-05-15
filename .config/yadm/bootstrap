@@ -130,11 +130,16 @@ colors_file=~/.config/oomox/colors/colors
 oomox-cli -m gtk320 "$colors_file"
 /opt/oomox/plugins/icons_papirus/change_color.sh "$colors_file"
 
+# Although the user may or may not have updated depending on the options chosen before,
+# either way the Polybar upgrade reminder needs some date to function properly
+date +%s > ~/.cache/last_upgrade_time
+
 # Script is over. Tell the user possible next steps
 cat << EOF
-Bootstrap complete. Next you should modify the dotfiles for yourself.
+Bootstrap complete. Next you should modify the dotfiles for yourself
 
-You may also have your own private files on a USB or another device to transfer over.
+Set the start page using the instructions in the readme
+You may also have your own private files on a USB or another device to transfer over
 You should also install/configure anything not covered by these dotfiles
 
 If you did not install packages you were prompted with, you can do so later using:

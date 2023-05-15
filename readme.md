@@ -1,6 +1,6 @@
 # dotfiles
 
-My dotfiles for Arch Linux, managed using YADM
+My dotfiles for Arch Linux, managed using [YADM](https://yadm.io)
 
 > **Warning**:
 > I am not responsible to any issues that arise from using these.
@@ -14,6 +14,13 @@ yadm clone https://github.com/LavenderPerry/dotfiles
 # look at / edit dotfiles before running this
 yadm bootstrap
 ```
+
+## Using with my startpage (only works on Firefox/Librewolf/etc)
+1. Go to <about:preferences#home>
+2. Set "Homepage and new windows" to "Custom URLs"
+3. In the text box that appears, enter <https://lavenderperry.github.io/startpage>
+4. Install [New Tab Override](https://addons.mozilla.org/en-US/firefox/addon/new-tab-override)
+5. Set the option to "current home page"
 
 ## Files you may want to edit
 * **.gitconfig**, **.stack/config.yaml** -- change to use your own name/email

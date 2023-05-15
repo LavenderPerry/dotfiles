@@ -1,6 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    dependencies = "cmp-nvim-lsp",
     event = { "BufReadPost", "BufNewFile" },
     opts = {
       setup = {
@@ -18,12 +19,14 @@ return {
     },
     config = function (_, opts)
       local lspconfig = require("lspconfig")
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       for _, server in ipairs(opts.setup) do
-        lspconfig[server].setup({})
+        lspconfig[server].setup({ capabilities = capabilities })
       end
 
       lspconfig.lua_ls.setup({
+        capabilities = capabilities,
         settings = {
           Lua = {
             diagnostics = { globals = { "vim" } },
