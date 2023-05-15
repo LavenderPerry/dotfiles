@@ -1,0 +1,18 @@
+{
+  "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
+  "cmp-nvim-lsp": { "branch": "main", "commit": "0e6b2ed705ddcff9738ec4ea838141654f12eeef" },
+  "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
+  "cmp-snippy": { "branch": "master", "commit": "9af1635fe40385ffa3dabf322039cb5ae1fd7d35" },
+  "haskell-tools.nvim": { "branch": "1.x.x", "commit": "55c2af43c1624acb3029e12d6c0a2287447dd875" },
+  "lazy.nvim": { "branch": "main", "commit": "aba872ec78ffe7f7367764ab0fff6f0170421fde" },
+  "mini.base16": { "branch": "main", "commit": "577219204f2e29ff4e2095c979409d5498d7c226" },
+  "nvim-autopairs": { "branch": "master", "commit": "7747bbae60074acf0b9e3a4c13950be7a2dff444" },
+  "nvim-cmp": { "branch": "main", "commit": "d153771162bd9795d9f7142df5c674b61066a585" },
+  "nvim-jdtls": { "branch": "master", "commit": "355de7458fd63ccef9c6485d952ea118ba2cb46a" },
+  "nvim-lspconfig": { "branch": "master", "commit": "df58d91c9351a9dc5be6cf8d54f49ab0d9a64e73" },
+  "nvim-snippy": { "branch": "master", "commit": "e6482a99bca307b0418c91dc5c78345ec236dbbe" },
+  "nvim-treesitter": { "branch": "master", "commit": "680807fa6a482c639119098bc48ca3831c66db13" },
+  "plenary.nvim": { "branch": "master", "commit": "9ac3e9541bbabd9d73663d757e4fe48a675bb054" },
+  "smartcolumn.nvim": { "branch": "main", "commit": "0c572e3eae48874f25b74394a486f38cadb5c958" },
+  "trouble.nvim": { "branch": "main", "commit": "d56bfc0c501ced4002a57cb60433362fb2ce9c4d" }
+}

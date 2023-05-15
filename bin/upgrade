@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+# package updates
+pikaur -Syu
+
+# Neovim plugin updates
+printf "\n\e[34;1m::\e[37m Starting Neovim plugin upgrade...\e[0m\n"
+nvim_output=$(nvim --headless "+Lazy! sync" +qa)
+[ "$nvim_output" ] && echo "$nvim_output" || echo " upgrade gave no output"
+
+
+# save upgrade time (for Polybar upgrade reminder)
+date +%s > ~/.cache/last_upgrade_time

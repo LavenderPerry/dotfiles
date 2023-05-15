@@ -1,0 +1,143 @@
+#!/usr/bin/env sh
+
+# Quit with warning if script is run as root
+if [ "$(id -u)" -eq 0 ]; then
+  echo "Please do not run the bootstrap as root"
+  exit 1
+fi
+
+# Fails if command specified by $1 does not exist
+command_exists() {
+  command -v "$1" > /dev/null
+}
+
+# Prompts user with question specified by $1
+# Succeeds if user enters "y", indicating yes, fails otherwise
+said_yes() {
+  printf "%s? [y/N]: " "$1"
+  read -r answer
+  [ "$answer" = "y" ]
+}
+
+# Installs packages from file in the same directory as this script
+# File lists all packages separated by newlines
+# Installs from file packages_$1.txt, where $1 is replaced
+install_packages() {
+  echo "Installing $1 packages..."
+  # Word splitting intentional here
+  # shellcheck disable=SC2046
+  pikaur -S --needed $(cat "$BOOTSTRAP_DIR/packages_$1.txt")
+  echo "Finished installing $1 packages"
+}
+
+# Copies root file to its place relative to rooy
+use_etc_file() {
+  $PRIV_ESC_CMD mkdir -p "/etc/${1%/*}"
+  $PRIV_ESC_CMD cp "$BOOTSTRAP_DIR/etc_files/$1" "/etc/$1"
+}
+
+BOOTSTRAP_DIR=$(dirname "$0")
+PRIV_ESC_CMD=$(command_exists sudo && echo "sudo" || echo "su -c")
+
+# Make sure user understands what they are doing
+cat << EOF
+By running the bootstrap you agree:
+  * it will install many things that you may not want if you do not modify it
+  * any issues it causes are not my fault
+
+Before continuing I highly recommend:
+  * look at every file in $BOOTSTRAP_DIR, starting with 'bootstrap' (this script)
+  * make sure they do what you want, and modify them (be careful when doing so)
+  * if something does not work, run 'yadm reset --hard HEAD' to undo your changes
+
+EOF
+said_yes "Continue to run script" || exit
+
+# Install Pikaur if not on system
+if ! command_exists pikaur; then
+  echo "Installing Pikaur..."
+  prev_dir=$(pwd)
+  pikaur_build_dir=~/.cache/pikaur/build
+  $PRIV_ESC_CMD pacman -S --needed git fakeroot
+  mkdir -p $pikaur_build_dir
+  cd $pikaur_build_dir || exit 1
+  git clone https://aur.archlinux.org/pikaur.git
+  cd pikaur || exit 1
+  makepkg -fsri
+  cd "$prev_dir" || exit 1
+  rm -rf ~/.cache/pikaur
+fi
+
+# Install essential packages, the rest will be prompts later
+install_packages essential
+
+# Prompt about files in /etc
+file="pacman.conf"
+cat << EOF
+Now asking about adding/changing files in /etc
+
+Adding $file will:
+  * enable colors
+  * enable Pacman themed progress bars
+  * enable multilib
+  * update all packages (to sync multilib and avoid partial upgrades)
+EOF
+if said_yes "Add $file"; then
+  use_etc_file "$file"
+  pikaur -Syu
+fi
+file="udev/rules.d/70-controller.rules"
+said_yes "Add $file (support for wired PDP Faceoff controller)" && use_etc_file "$file"
+file="udev/rules.d/99-lowbat.rules"
+said_yes "Add $file (hibernates computer at 5% battery)" && use_etc_file "$file"
+file="X11/xorg.conf.d/20-amdgpu.conf"
+said_yes "Add $file (configures AMD GPUs to stop screen tearing)" && use_etc_file "$file"
+file="X11/xorg.conf.d/30-touchpad.conf"
+cat << EOF
+Adding $file will:
+  * enable tap to click on touchpads
+  * enable natural scrolling on touchpads (scroll direction reversed)
+  * keep input from touchpads enabled while typing
+EOF
+said_yes "Add $file" && use_etc_file "$file"
+
+# Prompt about non-essential packages
+cat << EOF
+Now asking about non-essential packages
+Saying yes to either of these next two prompts will, if multilib is disabled:
+  * enable multilib
+  * update all packages (to sync multilib and avoid partial upgrades)
+If you applied the /etc/pacman.conf earlier multilib is enabled so this won't happen.
+EOF
+for package_category in extra system; do
+  if said_yes "Install $package_category packages"; then
+    if grep "#\[multilib]" /etc/pacman.conf; then
+      $PRIV_ESC_CMD sed -i "/\[multilib\]/,/Include/" 's/^#//' /etc/pacman.conf
+      pikaur -Syu
+    fi
+    install_packages $package_category
+  fi
+done
+
+# Install cursor theme
+echo "Installing Comix Cursors (left handed)..."
+url="https://limitland.gitlab.io/comixcursors/ComixCursors-LH-0.9.2.tar.bz2"
+curl "$url" | tar -xjC ~/.icons ComixCursors-LH-White
+
+# Build customized GTK and icon themes
+echo "Building themes..."
+colors_file=~/.config/oomox/colors/colors
+oomox-cli -m gtk320 "$colors_file"
+/opt/oomox/plugins/icons_papirus/change_color.sh "$colors_file"
+
+# Script is over. Tell the user possible next steps
+cat << EOF
+Bootstrap complete. Next you should modify the dotfiles for yourself.
+
+You may also have your own private files on a USB or another device to transfer over.
+You should also install/configure anything not covered by these dotfiles
+
+If you did not install packages you were prompted with, you can do so later using:
+  * the files $BOOTSTRAP_DIR/packages_*.txt
+  * 'pikaur -S --needed \$(cat FILE)', where FILE is one of the aforementioned files
+EOF

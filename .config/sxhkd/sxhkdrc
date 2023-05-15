@@ -1,0 +1,44 @@
+#
+# menus
+#
+
+alt + space
+  xfce4-appfinder
+
+#
+# media keys
+#
+
+XF86Audio{Raise,Lower}Volume
+  pactl set-sink-volume @DEFAULT_SINK@ {+,-}5%
+
+XF86AudioMute
+  pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+XF86MonBrightness{Up,Down}
+  light -{A,U} 5
+
+Print
+  maim -s --format png /dev/stdout | xclip -selection clipboard -t image/png -i
+
+#
+# bspwm hotkeys
+#
+
+alt + {_,shift + }Tab
+  bspc node -f {next,prev}
+
+alt + {_,shift + }q
+  bspc node -{c,k}
+
+alt + {_,shift + }{1-3}
+  bspc {desktop -f,node -d} '^{1-3}'
+
+alt + f
+  bspc node -t '~fullscreen'
+
+alt + m
+  bspc desktop -l next
+
+alt + b
+  bspc node -s biggest.window.local
