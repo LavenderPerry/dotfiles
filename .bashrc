@@ -19,7 +19,7 @@ cd() {
   current_repository=$(git rev-parse --show-toplevel 2> /dev/null)
 	if [ "$current_repository" ] && \
 	   [ "$current_repository" != "$last_repository" ]; then
-		onefetch --true-color never
+		onefetch
 	fi
 	last_repository=$current_repository
 }
@@ -40,3 +40,6 @@ alias chmod="chmod -c --preserve-root"
 alias chgrp="chgrp -c --preserve-root"
 alias grep="grep --color"
 alias :q="exit"
+
+# Run fetch
+hyfetch

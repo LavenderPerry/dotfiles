@@ -15,6 +15,13 @@ yadm clone https://github.com/LavenderPerry/dotfiles
 yadm bootstrap
 ```
 
+## Updating
+When updating your system, run `bin/upgrade` instead of pacman/pikaur -Syu.\
+This script takes care of both Arch Linux packages and Neovim plugins.\
+It also saves the time of the upgrade for the Polybar upgrade reminder to work.
+
+To upgrade the dotfiles, run `yadm pull`. You may also need to run `yadm bootstrap` again.
+
 ## Using with my startpage (only works on Firefox/Librewolf/etc)
 1. Go to <about:preferences#home>
 2. Set "Homepage and new windows" to "Custom URLs"
