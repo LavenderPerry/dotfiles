@@ -1,3 +1,4 @@
+system-ghc: false
 templates:
   params:
     author-email: "endie2@protonmail.com"

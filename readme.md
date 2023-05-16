@@ -17,8 +17,9 @@ yadm bootstrap
 ```
 
 ## Updating
-When updating your system, run `bin/upgrade` instead of pacman/pikaur -Syu.\
-This script takes care of Arch Linux packages, Neovim plugins, and Ruby gems.\
+When updating your system, run `upgrade` instead of pacman/pikaur -Syu.\
+This is actually `scripts/upgrade.sh`, but gets symlinked to `bin/upgrade` on bootstrap.\
+`upgrade` updates Arch Linux packages, Neovim plugins, Ruby gems, and Node packages.\
 It also saves the time of the upgrade for the Polybar upgrade reminder to work.
 
 To upgrade the dotfiles, run `yadm pull`. You may also need to run `yadm bootstrap` again.

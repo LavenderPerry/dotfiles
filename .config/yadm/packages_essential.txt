@@ -4,9 +4,12 @@ bash-completion
 bash-language-server
 bat
 bspwm
+dhall-lsp-server
 dunst
+eslint-language-server
 fakeroot
-haskell-language-server
+gcc
+ghcup-hs-bin
 hoogle
 hyfetch
 jdtls
@@ -17,6 +20,7 @@ make
 marksman-bin
 musikcube-bin
 neovim
+npm
 onefetch
 pikaur
 pipewire-pulse
@@ -25,7 +29,6 @@ polybar
 pulseaudio-alsa
 ruby
 shellcheck
-stack
 sxhkd
 themix-icons-papirus-git
 themix-theme-oomox-git

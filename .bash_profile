@@ -1,7 +1,5 @@
 # Set environment variables
-PATH=~/bin:$PATH
-export EDITOR="nvim"
-export HISTCONTROL="erasedups"
+source "$HOME/.bash_env"
 
 # Start desktop at login
 # https://wiki.archlinux.org/title/Xinit#Autostart_X_at_login

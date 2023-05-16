@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ -z "$BASH_ENV_SOURCED" ]; then
+  PATH=~/bin:$PATH
+  export EDITOR="nvim"
+  export HISTCONTROL="erasedups"
+  export XDG_BIN_HOME=~/bin
+  export GHCUP_USE_XDG_DIRS=1
+  export BASH_ENV_SOURCED=1
+fi
