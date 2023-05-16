@@ -1,6 +1,24 @@
 Layout/LineLength:
   Max: 90
 
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 50
+
+Metrics/ModuleLength:
+  Max: 200
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 

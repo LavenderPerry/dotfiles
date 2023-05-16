@@ -4,6 +4,7 @@ bash-completion
 bash-language-server
 bat
 bspwm
+dunst
 fakeroot
 haskell-language-server
 hoogle
@@ -14,13 +15,15 @@ lua-language-server
 maim
 make
 marksman-bin
+musikcube-bin
 neovim
 onefetch
 pikaur
 pipewire-pulse
 playerctl
 polybar
-ruby-solargraph
+pulseaudio-alsa
+ruby
 shellcheck
 stack
 sxhkd

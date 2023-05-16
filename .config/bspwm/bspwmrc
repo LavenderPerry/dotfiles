@@ -26,3 +26,4 @@ xsetroot -cursor_name left_ptr -solid "#2c1c30"
 
 polybar mybar &
 sxhkd &
+dunst &

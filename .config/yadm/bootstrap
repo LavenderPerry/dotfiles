@@ -71,6 +71,9 @@ fi
 # Install essential packages, the rest will be prompts later
 install_packages essential
 
+# Install Solargraph (AUR version doesn't work)
+gem install solargraph
+
 # Prompt about files in /etc
 file="pacman.conf"
 cat << EOF

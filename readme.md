@@ -1,6 +1,7 @@
 # dotfiles
 
-My dotfiles for Arch Linux, managed using [YADM](https://yadm.io)
+My dotfiles for Arch Linux, managed using [YADM](https://yadm.io)\
+*Screenshot will be here soon™*
 
 > **Warning**:
 > I am not responsible to any issues that arise from using these.
@@ -17,7 +18,7 @@ yadm bootstrap
 
 ## Updating
 When updating your system, run `bin/upgrade` instead of pacman/pikaur -Syu.\
-This script takes care of both Arch Linux packages and Neovim plugins.\
+This script takes care of Arch Linux packages, Neovim plugins, and Ruby gems.\
 It also saves the time of the upgrade for the Polybar upgrade reminder to work.
 
 To upgrade the dotfiles, run `yadm pull`. You may also need to run `yadm bootstrap` again.

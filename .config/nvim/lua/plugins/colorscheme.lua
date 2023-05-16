@@ -4,8 +4,8 @@ return {
     palette = {
       base00 = "#2c1c30",
       base01 = "#3b2640",
-      base02 = "#4a2f50",
-      base03 = "#583960",
+      base02 = "#583960",
+      base03 = "#be9fc6",
       base04 = "#d4bfd9",
       base05 = "#e9dfec",
       base06 = "#f4eff6",

@@ -26,5 +26,8 @@ end
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- No '~' at end of buffer
+vim.opt.fillchars:append({ eob = " " })
+
 -- Install/load plugins (see lua/plugins/)
 require("lazy").setup("plugins")

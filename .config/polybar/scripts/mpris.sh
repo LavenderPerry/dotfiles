@@ -24,7 +24,7 @@ case $(playerctl status 2> /dev/null) in
     ;;
 esac
 
-max_title_artist_len=80
+max_title_artist_len=90
 
 title=$(playerctl metadata title)
 artist=$(playerctl metadata artist)
