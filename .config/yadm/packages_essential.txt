@@ -6,6 +6,7 @@ bat
 bspwm
 dhall-lsp-server
 dunst
+esbuild
 eslint-language-server
 fakeroot
 gcc
