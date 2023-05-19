@@ -7,7 +7,6 @@ bspwm
 dhall-lsp-server
 dunst
 esbuild
-eslint-language-server
 fakeroot
 gcc
 ghcup-hs-bin
@@ -36,6 +35,7 @@ themix-theme-oomox-git
 ttf-material-design-icons-webfont
 ttf-roboto
 ttf-roboto-mono-nerd
+typescript-language-server
 vscode-css-languageserver
 vscode-html-languageserver
 vscode-json-languageserver

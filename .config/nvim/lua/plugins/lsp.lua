@@ -8,15 +8,15 @@ return {
         "bashls",
         "cssls",
         "dhall_lsp_server",
-        "eslint",
-        -- HLS is handled by haskell-tools.nvim
+        -- hls is handled by haskell-tools.nvim
         "html",
-        --- JDTLS is handled by nvim-jdtls
+        --- jdtls is handled by nvim-jdtls
         "jsonls",
-        -- LuaLS is set up with custom options
+        -- lua_ls is set up with custom options
         "marksman",
         "purescriptls",
         "solargraph",
+        -- tsserver is handled by typescript.nvim
         "yamlls"
       }
     },
@@ -72,6 +72,12 @@ return {
         cmd = { vim.fn.stdpath("data") .. "/mason/bin/jdtls" }
       })
     end
+  },
+  {
+    "jose-elias-alvarez/typescript.nvim",
+    dependencies = "nvim-lspconfig",
+    ft = { "javascript", "typescript" },
+    config = true
   },
   {
     "folke/trouble.nvim",
