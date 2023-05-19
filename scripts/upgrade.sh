@@ -12,10 +12,6 @@ pikaur -Syu
 starting_upgrade_message "Ruby gem"
 gem update
 
-# NodeJS package updates
-starting_upgrade_message "NodeJS package"
-npm update -g
-
 # Neovim plugin updates
 starting_upgrade_message "Neovim plugin"
 nvim_output=$(nvim --headless "+Lazy! sync" +qa)

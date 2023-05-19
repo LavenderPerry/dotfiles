@@ -7,14 +7,12 @@ return {
       setup = {
         "bashls",
         "cssls",
-        "dhall_lsp_server",
         -- hls is handled by haskell-tools.nvim
         "html",
         --- jdtls is handled by nvim-jdtls
         "jsonls",
         -- lua_ls is set up with custom options
         "marksman",
-        "purescriptls",
         "solargraph",
         -- tsserver is handled by typescript.nvim
         "yamlls"
