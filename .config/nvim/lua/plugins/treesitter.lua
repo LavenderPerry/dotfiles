@@ -11,6 +11,7 @@ return {
       "bash",
       "comment",
       "css",
+      "elm",
       "gitcommit",
       "gitignore",
       "haskell",

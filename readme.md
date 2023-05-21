@@ -19,17 +19,10 @@ yadm bootstrap
 ## Updating
 When updating your system, run `upgrade` instead of pacman/pikaur -Syu.\
 This is actually `scripts/upgrade.sh`, but gets symlinked to `bin/upgrade` on bootstrap.\
-`upgrade` updates Arch Linux packages, Ruby gems, and Neovim plugins.\
+`upgrade` updates Arch Linux packages, Adblock filters, Ruby gems, and Neovim plugins.\
 It also saves the time of the upgrade for the Polybar upgrade reminder to work.
 
 To upgrade the dotfiles, run `yadm pull`. You may also need to run `yadm bootstrap` again.
-
-## Using with my startpage (only works on Firefox/Librewolf/etc)
-1. Go to <about:preferences#home>
-2. Set "Homepage and new windows" to "Custom URLs"
-3. In the text box that appears, enter <https://lavenderperry.github.io/startpage>
-4. Install [New Tab Override](https://addons.mozilla.org/en-US/firefox/addon/new-tab-override)
-5. Set the option to "current home page"
 
 ## Files you may want to edit
 * **.gitconfig**, **.stack/config.yaml** -- change to use your own name/email

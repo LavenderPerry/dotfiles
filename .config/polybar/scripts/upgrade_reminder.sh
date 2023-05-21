@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 seconds_since_last_upgrade=$(($(date +%s) - $(cat ~/.cache/last_upgrade_time)))
 days_since_last_upgrade=$((seconds_since_last_upgrade / 86400))

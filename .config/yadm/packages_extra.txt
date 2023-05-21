@@ -1,4 +1,4 @@
-firefox
+discord
 itch-setup-bin
 jdk17-openjdk
 jre17-openjdk
@@ -19,5 +19,6 @@ sudo
 thunar
 ttf-twemoji
 unzip
+vencord-installer-bin
 vlc
 zip

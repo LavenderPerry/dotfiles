@@ -5,6 +5,8 @@ bash-language-server
 bat
 bspwm
 dunst
+elm-bin
+elm-language-server
 fakeroot
 gcc
 ghcup-hs-bin
@@ -12,6 +14,7 @@ hoogle
 hyfetch
 jdtls
 light
+luakit
 lua-language-server
 maim
 make

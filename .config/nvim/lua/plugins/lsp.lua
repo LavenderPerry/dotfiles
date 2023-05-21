@@ -7,6 +7,7 @@ return {
       setup = {
         "bashls",
         "cssls",
+        "elmls",
         -- hls is handled by haskell-tools.nvim
         "html",
         --- jdtls is handled by nvim-jdtls

@@ -150,6 +150,9 @@ colors_file=~/.config/oomox/colors/colors
 oomox-cli -m gtk320 "$colors_file"
 /opt/oomox/plugins/icons_papirus/change_color.sh "$colors_file"
 
+# Get adblock filter lists for Luakit
+~/scripts/get_latest_adblock_filters.sh
+
 # Link all scripts to bin, so they are in path
 # Also removes the extensions from the links
 for script in ~/scripts/*; do
