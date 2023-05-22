@@ -20,12 +20,12 @@ s.webview.user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/53
 
 -- Other webview settings
 s.webview.enable_java = false
-s.webview.enable_media_stream = true
 s.webview.enable_offline_web_application_cache = false
 s.webview.media_playback_requires_gesture = true
 
--- Home / new tab
+-- Home / tabs
 local startpage = "https://lavenderperry.github.io/startpage"
+s.window.close_with_last_tab = true
 s.window.home_page = startpage
 s.window.new_tab_page = startpage
 s.window.reuse_new_tab_pages = true

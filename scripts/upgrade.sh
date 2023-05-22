@@ -7,6 +7,9 @@ starting_upgrade_message() {
 
 pikaur -Syu
 
+# Vencord needs to be reinstalled on any Discord update
+[ -f /usr/lib/discord/app.asar ] && install_vencord
+
 starting_upgrade_message "Adblock filters"
 get_latest_adblock_filters
 
@@ -16,7 +19,7 @@ gem update
 starting_upgrade_message "Neovim plugin"
 nvim --headless "+Lazy! sync" +qa
 
-# save upgrade time for Polybar upgrade reminder
+# Save upgrade time for Polybar upgrade reminder
 date +%s > ~/.cache/last_upgrade_time
 
 printf "\n\nAll upgrades are done!"

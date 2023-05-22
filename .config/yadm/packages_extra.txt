@@ -1,4 +1,5 @@
 discord
+freetube
 itch-setup-bin
 jdk17-openjdk
 jre17-openjdk
@@ -9,6 +10,7 @@ love
 man-db
 obs-studio
 p7zip
+patch
 prismlauncher-qt5-bin
 proton-ge-custom-bin
 protontricks
