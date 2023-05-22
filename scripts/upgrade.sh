@@ -10,9 +10,6 @@ pikaur -Syu
 # Vencord needs to be reinstalled on any Discord update
 [ -f /usr/lib/discord/app.asar ] && install_vencord
 
-starting_upgrade_message "Adblock filters"
-get_latest_adblock_filters
-
 starting_upgrade_message "Ruby gem"
 gem update
 

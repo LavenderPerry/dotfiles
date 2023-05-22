@@ -1,5 +1,5 @@
-discord
-freetube
+discord-electron-openasar
+firefox
 itch-setup-bin
 jdk17-openjdk
 jre17-openjdk

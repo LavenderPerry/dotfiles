@@ -1,12 +1,12 @@
 #!/bin/sh
 
+pikaur -Qq discord-electron-openasar || exit
+
 DISCORD_DIR=/usr/lib/discord
 ASAR="$DISCORD_DIR/app.asar"
 VENCORD_DIR=~/.config/Vencord/dist
 
 echo "Installing/Reinstalling Vencord..."
-
-pikaur -Qq discord-electron-openasar || pikaur -S discord-electron-openasar
 
 sudo mv "$ASAR" "$DISCORD_DIR/_app.asar"
 sudo mkdir -p "$ASAR"
