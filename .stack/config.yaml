@@ -1,6 +1,0 @@
-system-ghc: false
-templates:
-  params:
-    author-email: "endie2@protonmail.com"
-    author-name: "Lavender Perry"
-    github-username: "LavenderPerry"

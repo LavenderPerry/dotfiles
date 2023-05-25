@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/bash
 
 # Quit with warning if script is run as root
 if [ "$(id -u)" -eq 0 ]; then
@@ -14,19 +14,19 @@ command_exists() {
 # Prompts user with question specified by $1
 # Succeeds if user enters "y", indicating yes, fails otherwise
 said_yes() {
-  printf "%s? [y/N]: " "$1"
-  read -r answer
+  read -rp "$1? [y/N]: " answer
   [ "$answer" = "y" ]
 }
 
 # Installs packages from file in the same directory as this script
 # File lists all packages separated by newlines
-# Installs from file packages_$1.txt, where $1 is replaced
+# Installs from file ~/.config/packages/$1, where $1 is replaced
 install_packages() {
   echo "Installing $1 packages..."
-  # Word splitting intentional here
-  # shellcheck disable=SC2046
-  pikaur -S --needed $(cat "$BOOTSTRAP_DIR/packages_$1.txt")
+
+  readarray -t pkgs < <(cat "$HOME/.config/packages/$1")
+  pikaur -S --needed "${pkgs[@]}"
+
   echo "Finished installing $1 packages"
 }
 
@@ -54,8 +54,7 @@ EOF
 said_yes "Continue to run script" || exit
 
 # Make sure environment variables are set, as some of them are needed later in the script
-# shellcheck source=../../.bash_env
-. ~/.bash_env
+~/.bash_env
 
 # Install Pikaur if not on system
 if ! command_exists pikaur; then
@@ -74,22 +73,6 @@ fi
 
 # Install essential packages, the rest will be prompts later
 install_packages essential
-
-# Install Haskell & Ruby LSPs/build tools
-# (versions in Arch repos/AUR don't work as well)
-for program in hls stack; do
-  ghcup install "$program"
-done
-gem install solargraph
-
-# Make stack install GHC with GHCUP
-# https://www.haskell.org/ghcup/guide/#strategy-2-stack-hooks-new-recommended
-mkdir -p ~/.stack/hooks
-curl \
-  https://raw.githubusercontent.com/haskell/ghcup-hs/master/scripts/hooks/stack/ghc-install.sh \
-  > ~/.stack/hooks/ghc-install.sh
-chmod +x ~/.stack/hooks/ghc-install.sh
-# Don't need to set system-ghc to false in config -- it already is in these dotfiles
 
 # Prompt about files in /etc
 file="pacman.conf"
@@ -139,8 +122,12 @@ for package_category in extra system; do
   fi
 done
 
+# Install Rust tools
+rustup default stable
+rustup component add rust-src
+
 # Install Vencord (only happens if extra packages are installed)
-~/scripts/install_vencord.sh
+~/scripts/install-vencord.sh
 
 # Install cursor theme
 echo "Installing Comix Cursors (left handed)..."
@@ -169,11 +156,9 @@ date +%s > ~/.cache/last_upgrade_time
 cat << EOF
 Bootstrap complete. Next you should modify the dotfiles for yourself
 
-Set the start page using the instructions in the readme
-You may also have your own private files on a USB or another device to transfer over
+You may have your own private files on a USB or another device to transfer over
 You should also install/configure anything not covered by these dotfiles
 
 If you did not install packages you were prompted with, you can do so later using:
-  * the files $BOOTSTRAP_DIR/packages_*.txt
-  * 'pikaur -S --needed \$(cat FILE)', where FILE is one of the aforementioned files
+'pikaur -S --needed \$(cat FILE)', where FILE is one of the files in ~/.config/packages/
 EOF

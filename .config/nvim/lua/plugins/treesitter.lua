@@ -11,10 +11,8 @@ return {
       "bash",
       "comment",
       "css",
-      "elm",
       "gitcommit",
       "gitignore",
-      "haskell",
       "html",
       "ini",
       "java",
@@ -29,6 +27,7 @@ return {
       "markdown_inline",
       "regex",
       "ruby",
+      "rust",
       "toml",
       "vimdoc",
       "yaml"

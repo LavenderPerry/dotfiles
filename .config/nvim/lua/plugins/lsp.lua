@@ -7,13 +7,12 @@ return {
       setup = {
         "bashls",
         "cssls",
-        "elmls",
-        -- hls is handled by haskell-tools.nvim
         "html",
         --- jdtls is handled by nvim-jdtls
         "jsonls",
         -- lua_ls is set up with custom options
         "marksman",
+        -- rust_analyzer is handled by rust-tools.nvim
         "solargraph",
         -- tsserver is handled by typescript.nvim
         "yamlls"
@@ -39,30 +38,6 @@ return {
     end
   },
   {
-    "mrcjkb/haskell-tools.nvim",
-    dependencies = { "nvim-lspconfig", "nvim-lua/plenary.nvim" },
-    ft = "haskell",
-    branch = "1.x.x",
-    config = function ()
-      local ht = require("haskell-tools")
-      ht.start_or_attach({
-        hls = {
-          on_attach = function (_, bufnr)
-            local opts = { buffer = bufnr, noremap = true, silent = true }
-            -- keymaps from readme
-            for keys, action in pairs({
-              ["<space>ca"] = vim.lsp.codelens.run,
-              ["<space>ea"] = ht.lsp.buf_eval_all,
-              ["<space>hs"] = ht.hoogle.hoogle_signature
-            }) do
-              vim.keymap.set("n", keys, action, opts)
-            end
-          end
-        }
-      })
-    end
-  },
-  {
     "mfussenegger/nvim-jdtls",
     dependencies = "nvim-lspconfig",
     ft = "java",
@@ -71,6 +46,11 @@ return {
         cmd = { vim.fn.stdpath("data") .. "/mason/bin/jdtls" }
       })
     end
+  },
+  {
+    "simrat39/rust-tools.nvim",
+    dependencies = "nvim-lspconfig",
+    ft = "rust"
   },
   {
     "jose-elias-alvarez/typescript.nvim",

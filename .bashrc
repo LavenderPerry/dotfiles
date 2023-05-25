@@ -9,7 +9,7 @@ PROMPT_COMMAND='GIT_PS1_SHOWDIRTYSTATE=1 \
   GIT_PS1_SHOWUNTRACKEDFILES=1 \
   __git_ps1 \
   "\[\e[35m\]\W\[\e[33m\]" \
-  " \[\e[3$([ $? -eq 0 ] && echo 2 || echo 1)m\]λ\[\e[0m\] "'
+  " \[\e[3$([ $? -eq 0 ] && echo 2 || echo 1)m\]󰴈\[\e[0m\] "'
 
 # Git repository greeter
 # From https://github.com/o2sh/onefetch/wiki/getting-started#misc

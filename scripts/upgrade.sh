@@ -1,22 +1,8 @@
 #!/bin/sh
 
-# Outputs progress message similar to style of pacman/pikaur
-starting_upgrade_message() {
-  printf "\n\e[34;1m::\e[37m Starting %s upgrade...\e[0m\n" "$@"
-}
-
 pikaur -Syu
-
-# Vencord needs to be reinstalled on any Discord update
-[ -f /usr/lib/discord/app.asar ] && install_vencord
-
-starting_upgrade_message "Ruby gem"
-gem update
-
-starting_upgrade_message "Neovim plugin"
+[ -f /usr/lib/discord/app.asar ] && install-vencord # Reinstalls Vencord if needed
+rustup update
 nvim --headless "+Lazy! sync" +qa
-
-# Save upgrade time for Polybar upgrade reminder
-date +%s > ~/.cache/last_upgrade_time
-
+date +%s > ~/.cache/last_upgrade_time # Saves upgrade time for Polybar upgrade reminder
 printf "\n\nAll upgrades are done!"

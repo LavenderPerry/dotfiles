@@ -16,20 +16,33 @@ yadm clone https://github.com/LavenderPerry/dotfiles
 yadm bootstrap
 ```
 
-## Updating
-When updating your system, run `upgrade` instead of pacman/pikaur -Syu.\
-This is actually `scripts/upgrade.sh`, but gets symlinked to `bin/upgrade` on bootstrap.\
-`upgrade` updates Arch Linux packages, Ruby gems, and Neovim plugins.\
-It reinstalls Vencord after a Discord update (if discord-electron-openasar is installed). \
-Also, it saves the time of the upgrade for the Polybar upgrade reminder to work.
+## Scripts
+### install-vencord
+Manually Installs Vencord to work with the discord-electron-openasar package.\
+It will do nothing if discord-electron-openasar is not installed.\
+Other scripts will call this when needed, so only run it if you want to reinstall.
 
-To upgrade the dotfiles, run `yadm pull`. You may also need to run `yadm bootstrap` again.
+> **Important**:
+> The installation method used by this script is NOT SUPPORTED by Vencord.
+> If you run into an issue with Vencord, reproduce it with a normal Discord/Vencord
+> before seeking support from Vencord developers/community.
+> If you can not reproduce it, open an issue on this repository.
+
+### sync-spec
+Removes any installed packages not specified within the files in ~/.config/packages/ \
+Running this is not recommended until you customize these files
+
+### upgrade
+Run this instead of pacman/pikaur -Syu to update your system.\
+It updates Arch Linux packages, Neovim plugins, and developer tools.\
+Also, it runs `install-vencord` when needed to prevent updates from overwriting Vencord. \
+Additionally, it saves the time of the upgrade for the Polybar upgrade reminder to work.
 
 ## Files you may want to edit
-* **.gitconfig**, **.stack/config.yaml** -- change to use your own name/email
-* **.config/yadm/packages_essential.txt** -- remove what you don't want installed
+* **.gitconfig** -- change to use your own name/email
+* **.config/packages/essential** -- remove what you don't want installed
 * **.config/yadm/bootstrap** -- make changes depending on what packages you removed
 * **readme.md**, **LICENSE** -- delete after install
 
-You may want to delete any configs of packages you removed from packages_essential.txt\
-Additionally, it is recommended to look through ALL files in this repository
+You may want to delete any configs of packages you removed from the essential packages\
+Additionally, it is recommended to look through and customize ALL files in this repository
