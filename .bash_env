@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ -z "$BASH_ENV_SOURCED" ]; then
-  PATH=~/bin:$PATH
+  PATH=~/bin:~/.lovepotion/bin:$PATH
   export EDITOR="nvim"
   export HISTCONTROL="erasedups"
   export BASH_ENV_SOURCED=1

@@ -1,18 +1,20 @@
+local events = { "BufReadPost", "BufNewFile" }
+
 return {
   {
     "neovim/nvim-lspconfig",
     dependencies = "cmp-nvim-lsp",
-    event = { "BufReadPost", "BufNewFile" },
+    event = events,
     opts = {
       setup = {
+        "arduino_language_server",
         "bashls",
         "cssls",
         "html",
-        --- jdtls is handled by nvim-jdtls
+        -- jdtls is handled by nvim-jdtls
         "jsonls",
         -- lua_ls is set up with custom options
         "marksman",
-        -- rust_analyzer is handled by rust-tools.nvim
         "solargraph",
         -- tsserver is handled by typescript.nvim
         "yamlls"
@@ -42,15 +44,8 @@ return {
     dependencies = "nvim-lspconfig",
     ft = "java",
     config = function ()
-      require("jdtls").start_or_attach({
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/jdtls" }
-      })
+      require("jdtls").start_or_attach({ cmd = { "/usr/bin/jdtls" } })
     end
-  },
-  {
-    "simrat39/rust-tools.nvim",
-    dependencies = "nvim-lspconfig",
-    ft = "rust"
   },
   {
     "jose-elias-alvarez/typescript.nvim",
@@ -59,8 +54,45 @@ return {
     config = true
   },
   {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    event = events,
+    opts = {
+      highlight = { enable = true },
+      indent = { enable = true },
+      ensure_installed = {
+        "arduino",
+        "bash",
+        "comment",
+        "css",
+        "gitcommit",
+        "gitignore",
+        "html",
+        "ini",
+        "java",
+        "javascript",
+        "json",
+        "json5",
+        "jsonc",
+        "lua",
+        "luadoc",
+        "luap",
+        "markdown",
+        "markdown_inline",
+        "regex",
+        "toml",
+        "vimdoc",
+        "yaml"
+      }
+    },
+    config = function (_, opts)
+      require("nvim-treesitter.configs").setup(opts)
+    end
+  },
+  {
     "folke/trouble.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    dependencies = "nvim-lspconfig",
+    event = events,
     config = true
   }
 }

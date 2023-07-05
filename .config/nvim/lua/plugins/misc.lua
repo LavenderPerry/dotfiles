@@ -4,7 +4,7 @@ return {
     event = "InsertEnter",
     opts = {
       colorcolumn = 90,
-      disabled_filetypes = { "help", "lazy", "mason" }
+      disabled_filetypes = { "help", "lazy" }
     }
   },
   {

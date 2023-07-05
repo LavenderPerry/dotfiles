@@ -27,7 +27,6 @@ cd() {
 # Aliases
 # Some are taken from https://gist.github.com/anonymous/a9055e30f97bd19645c2
 alias lostfiles="sudo lostfiles"
-alias which="command -v"
 alias ls="ls -hF --color"
 alias la="ls -A"
 alias ll="la -l"
@@ -40,6 +39,9 @@ alias chmod="chmod -c --preserve-root"
 alias chgrp="chgrp -c --preserve-root"
 alias grep="grep --color"
 alias :q="exit"
+
+# Setup frum
+eval "$(frum init)"
 
 # Run fetch
 hyfetch

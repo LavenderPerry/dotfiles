@@ -74,27 +74,33 @@ fi
 # Install essential packages, the rest will be prompts later
 install_packages essential
 
-# Prompt about files in /etc
+# Prompt/apply files in /etc
+#
+# pacman.conf will be added without prompting
+# because some packages potentially installed later depend on custom repos defined in it.
+# Additionally, pacman.conf uses devkitPro repos,
+# so devkitPro will be set up before applying it
 file="pacman.conf"
-cat << EOF
-Now asking about adding/changing files in /etc
+$PRIV_ESC_CMD pacman-key \
+  --recv BC26F752D25B92CE272E0F44F7FD5492264BB9D0 \
+  --keyserver keyserver.ubuntu.com
+$PRIV_ESC_CMD pacman-key --lsign BC26F752D25B92CE272E0F44F7FD5492264BB9D0
+dkp_keyring_pkg_file="/tmp/devkitpro-keyring.pkg.tar.xz"
+curl "https://pkg.devkitpro.org/devkitpro-keyring.pkg.tar.xz" -o "$dkp_keyring_pkg_file"
+$PRIV_ESC_CMD pacman -U "$dkp_keyring_pkg_file"
+rm "$dkp_keyring_pkg_file"
+use_etc_file "$file"
+pikaur -Syu
 
-Adding $file will:
-  * enable colors
-  * enable Pacman themed progress bars
-  * enable multilib
-  * update all packages (to sync multilib and avoid partial upgrades)
-EOF
-if said_yes "Add $file"; then
-  use_etc_file "$file"
-  pikaur -Syu
-fi
 file="udev/rules.d/70-controller.rules"
 said_yes "Add $file (support for wired PDP Faceoff controller)" && use_etc_file "$file"
+
 file="udev/rules.d/99-lowbat.rules"
 said_yes "Add $file (hibernates computer at 5% battery)" && use_etc_file "$file"
+
 file="X11/xorg.conf.d/20-amdgpu.conf"
 said_yes "Add $file (configures AMD GPUs to stop screen tearing)" && use_etc_file "$file"
+
 file="X11/xorg.conf.d/30-touchpad.conf"
 cat << EOF
 Adding $file will:
@@ -105,26 +111,14 @@ EOF
 said_yes "Add $file" && use_etc_file "$file"
 
 # Prompt about non-essential packages
-cat << EOF
-Now asking about non-essential packages
-Saying yes to either of these next two prompts will, if multilib is disabled:
-  * enable multilib
-  * update all packages (to sync multilib and avoid partial upgrades)
-If you applied the /etc/pacman.conf earlier multilib is enabled so this won't happen.
-EOF
 for package_category in extra system; do
-  if said_yes "Install $package_category packages"; then
-    if grep "#\[multilib]" /etc/pacman.conf; then
-      $PRIV_ESC_CMD sed -i "/\[multilib\]/,/Include/" 's/^#//' /etc/pacman.conf
-      pikaur -Syu
-    fi
-    install_packages $package_category
-  fi
+  said_yes "Install $package_category packages" && install_packages $package_category
 done
 
-# Install Rust tools
-rustup default stable
-rustup component add rust-src
+# Install Ruby tools
+eval "$(frum init)"
+frum install 3.2.2
+gem install solargraph
 
 # Install Vencord (only happens if extra packages are installed)
 ~/scripts/install-vencord.sh
@@ -154,7 +148,7 @@ date +%s > ~/.cache/last_upgrade_time
 
 # Script is over. Tell the user possible next steps
 cat << EOF
-Bootstrap complete. Next you should modify the dotfiles for yourself
+Bootstrap complete. Next you should restart your computer
 
 You may have your own private files on a USB or another device to transfer over
 You should also install/configure anything not covered by these dotfiles

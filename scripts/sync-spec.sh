@@ -16,5 +16,12 @@ pkgs_to_remove() {
   pacman -Qdtq
 }
 
-readarray -t remove_pkgs < <(pkgs_to_remove)
-sudo pacman -Rsn "${remove_pkgs[@]}"
+remove_pkgs_txt=$(pkgs_to_remove)
+if [ -n "$remove_pkgs_txt" ]; then
+  printf "Packages to remove:\n%s\n" "$remove_pkgs_txt"
+  read -rp "Remove them? [Y/n] " answer
+  if [ "$answer" != "n" ]; then
+    readarray -t remove_pkgs < <(pkgs_to_remove)
+    sudo pacman -Rsn "${remove_pkgs[@]}"
+  fi
+fi
